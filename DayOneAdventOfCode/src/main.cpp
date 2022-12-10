@@ -1,5 +1,9 @@
 /*
  * Author : RaulSosa
+ *
+ * El objetivo es obtener de una matriz las 3 sumas más grandes sus filas.
+ *
+ *
  */
 
 #include<iostream>
@@ -13,12 +17,17 @@ vector<vector<int>> getPuzzleInput(string pathToFile);
 vector<int> getListOfSums(vector<vector<int>> list);
 void showContentInPuzzleInput(vector<vector<int>> puzzleInput);
 int dayOnePartOne(vector<vector<int>> list);
+vector<int> dayOnePartTwo(vector<int> listOfSums);
 
 int main(){
 
 
-	showContentInPuzzleInput(getPuzzleInput("src/input.txt"));
-	cout << "\nSUMA MAXIMA : " << dayOnePartOne(getPuzzleInput("src/input.txt"));
+	cout << "\nMax sum : " << dayOnePartOne(getPuzzleInput("src/input.txt"));
+	int first = dayOnePartTwo(getListOfSums(getPuzzleInput("src/input.txt")))[0];
+	int second = dayOnePartTwo(getListOfSums(getPuzzleInput("src/input.txt")))[1];
+	int thrid = dayOnePartTwo(getListOfSums(getPuzzleInput("src/input.txt")))[2];
+	cout << "\nFirst : " << first << "\nSecond : " << second << "\nThrid : " << thrid;
+	cout << "\nFist + Second + Thrird = " <<  first + second + thrid;
 	return 0;
 }
 
@@ -26,7 +35,14 @@ int dayOnePartOne(vector<vector<int>> list){
 	return getListOfSums(list)[getListOfSums(list).size()-1];
 }
 
-
+// Return list with podium of max sums
+vector<int> dayOnePartTwo(vector<int> listOfSums){
+	vector<int> podiumPlusSum;
+	podiumPlusSum.push_back(listOfSums[listOfSums.size()-1]);
+	podiumPlusSum.push_back(listOfSums[listOfSums.size()-2]);
+	podiumPlusSum.push_back(listOfSums[listOfSums.size()-3]);
+	return podiumPlusSum;
+}
 vector<int> getListOfSums(vector<vector<int>> list){
 	vector <int> listOfSums;
 	// 1 step : generate list with all sums from every list in @list
@@ -35,7 +51,6 @@ vector<int> getListOfSums(vector<vector<int>> list){
 	}
 	// 2 step : sort the generated list.
 	sort(listOfSums.begin(),listOfSums.end());
-
 	return listOfSums;
 }
 
