@@ -12,7 +12,7 @@ local.properties
 .recommenders
 .project
 .cproject
-
+Debug/
 
 # Compiled source #
 ###################
