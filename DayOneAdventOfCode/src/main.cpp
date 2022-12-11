@@ -1,8 +1,8 @@
 /*
  * Author : RaulSosa
  *
- * El objetivo es obtener de una matriz las 3 sumas más grandes sus filas.
- *
+ * Dada una lista de lista de numeros (una matriz) . Calcular la suma de cada una de sus listas
+ * internas y luego encontrar el top 3 de las listas cuyas sumas son las mas grandes.
  *
  */
 
