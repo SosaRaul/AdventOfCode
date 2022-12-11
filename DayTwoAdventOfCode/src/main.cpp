@@ -11,23 +11,17 @@ struct Game{
 	string winner;
 	int score;
 };
-
-// Returns vector with data gruop by round of three(represented like vector aswell)
-void showRound(vector<Game> round);
-vector<vector<Game>> getPuzzleInput(string pathToFile);
-int getScoreOfRound(vector<int> round);
+vector<Game> getPuzzleInput(string pathToFile);
+int getYouTotalScore(vector<Game> round);
 void setWinnerAndScoreOfGame(Game &game);
-void showPuzzleInput(vector<vector<Game>> tournament);
+
 
 int main(){
-getPuzzleInput("src/input2");
-
-
+	cout << getYouTotalScore(getPuzzleInput("src/input2"));
 	return 0;
 }
 
 void setWinnerAndScoreOfGame(Game &game){
-
 	switch(game.opponentBet){
 
 	case 'A':
@@ -69,49 +63,31 @@ void setWinnerAndScoreOfGame(Game &game){
 		break;
 	}
 }
-vector<vector<Game>> getPuzzleInput(string pathToFile){
+vector<Game> getPuzzleInput(string pathToFile){
 	ifstream puzzleInput(pathToFile);
-	vector<Game> round;
-	vector<vector<Game>> tournament;
-	int counterOfGames = 0;
+	vector<Game> tournament;
 	string line;
 
 	if(puzzleInput.is_open()){
 		while(!puzzleInput.eof()){
-			streampos lastPosition = puzzleInput.tellg(); // Avoid lost one line
+			//streampos lastPosition = puzzleInput.tellg(); // Avoid lost one line
 			getline(puzzleInput,line);
-			// Save the round
-			if(counterOfGames < 3){
-				Game newGame;
-				newGame.opponentBet = line[0];
-				newGame.youBet = line[2];
-				setWinnerAndScoreOfGame(newGame);
-				round.push_back(newGame);
-				cout << newGame.opponentBet << " " << newGame.youBet <<endl;
-				counterOfGames++;
-			}else{
-				// I must read three games  and save it . Then next round and so on.
-				cout << "Agregando round " << endl;
-				tournament.push_back(round);
-				round.clear();
-				counterOfGames = 0;
-				puzzleInput.seekg(lastPosition);
-			}
+			Game newGame;
+			newGame.opponentBet = line[0];
+			newGame.youBet = line[2];
+			setWinnerAndScoreOfGame(newGame);
+			tournament.push_back(newGame);
 		}
+
 	}else{
 			cout << "Can't open the file provided.";
 	}
 	return tournament;
 }
-void showPuzzleInput(vector<vector<Game>> tournament){
+int getYouTotalScore(vector<Game> tournament){
+	int totalScoreInTournament = 0;
 	for(unsigned int i = 0;i < tournament.size();i++){
-		for(unsigned int j = 0;j < tournament[i].size();j++){
-			//cout
-		}
+		totalScoreInTournament += tournament[i].score;
 	}
-}
-void showRound(vector<Game> round){
-	for(unsigned int i = 0;i < round.size();i++){
-		cout << round[i].opponentBet << " " << round[i].youBet << endl;
-	}
+	return totalScoreInTournament;
 }
