@@ -27,16 +27,15 @@ int getSumOfPriorities(string pathToFile);
 int searchItem(string items,char item);
 int main(){
 
-	//cout << getPuzzleInput("src/input3")[0][0]<<endl;
-	//cout << getPuzzleInput("src/input3")[0][1];
-	cout << getCommonItem("rzul","ladfdfdfdfz");
+
+	cout << getSumOfPriorities("src/input3");
 
 	return 0;
 }
-// Precondition : path to input valid
+// Precondition : path to input must be valid
 vector<vector<string>> getPuzzleInput(string pathToFile){
 
-	ifstream puzzleInput("src/input3");
+	ifstream puzzleInput(pathToFile);
 	string lineFromFile;
 	vector<vector<string>> rucksacks;
 	vector<string> items;
@@ -67,10 +66,10 @@ string getSubString(string word,int begin,int end){
 	}
 	return subString;
 }
-// Preconditon : Only one character in common!
+// Preconditon : Only one & unique common item!
 char getCommonItem(string firstHalf,string secondHalf){
-	// Find common item using binary search.
-	for(int i = 0;secondHalf.length();i++){
+	// Find common item using binary search
+	for(unsigned int i = 0;i < secondHalf.length();i++){
 		if(searchItem(firstHalf,secondHalf[i]) != -1){
 			return secondHalf[i];
 		}
@@ -78,20 +77,25 @@ char getCommonItem(string firstHalf,string secondHalf){
 }
 
 int getSumOfPriorities(string pathToFile){
-
+	int sum = 0;
+	char commonItem;
+	vector<vector<string>> rucksacks = getPuzzleInput(pathToFile);
+	for(unsigned int i = 0;i < rucksacks.size();i++){
+		commonItem = getCommonItem(rucksacks[i][0],rucksacks[i][1]);
+		if(searchItem("abcdefghijklmnopqrstuvwxyz",commonItem) != -1){
+			sum += commonItem - 96;
+		}else if (searchItem("ABCDEFGHIJKLMNOPQRSTUVWXYZ",commonItem) != -1){
+			sum += commonItem - 38;
+		}
+	}
+	return sum;
 }
 
 int searchItem(string items,char item){
-	int lo = 0, hi = items.length()-1;
-	while(lo <= hi){
-		int mid = lo+(hi-lo)/2;
-		if(item < items[mid]){
-			hi = mid-1;
-		}else if(item > items[mid]){
-			lo = mid+1;
-		}else{
-			return mid;
-		}
+	unsigned int i = 0;
+	while(i < items.length() && items[i] != item){
+		i++;
 	}
-	return -1;
+	return i == items.length() ? -1 : i;
+
 }
