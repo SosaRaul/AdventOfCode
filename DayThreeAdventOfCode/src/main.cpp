@@ -22,16 +22,18 @@
 using namespace std;
 string getSubString(string word,int begin,int end);
 vector<vector<string>> getPuzzleInput(string pathToFile);
-
+char getCommonItem(string firstHalf,string secondHalf);
+int getSumOfPriorities(string pathToFile);
+int searchItem(string items,char item);
 int main(){
 
-	cout << getPuzzleInput("src/input3")[0][0]<<endl;
-	cout << getPuzzleInput("src/input3")[0][1];
-
+	//cout << getPuzzleInput("src/input3")[0][0]<<endl;
+	//cout << getPuzzleInput("src/input3")[0][1];
+	cout << getCommonItem("rzul","ladfdfdfdfz");
 
 	return 0;
 }
-
+// Precondition : path to input valid
 vector<vector<string>> getPuzzleInput(string pathToFile){
 
 	ifstream puzzleInput("src/input3");
@@ -64,4 +66,32 @@ string getSubString(string word,int begin,int end){
 		subString += word[i];
 	}
 	return subString;
+}
+// Preconditon : Only one character in common!
+char getCommonItem(string firstHalf,string secondHalf){
+	// Find common item using binary search.
+	for(int i = 0;secondHalf.length();i++){
+		if(searchItem(firstHalf,secondHalf[i]) != -1){
+			return secondHalf[i];
+		}
+	}
+}
+
+int getSumOfPriorities(string pathToFile){
+
+}
+
+int searchItem(string items,char item){
+	int lo = 0, hi = items.length()-1;
+	while(lo <= hi){
+		int mid = lo+(hi-lo)/2;
+		if(item < items[mid]){
+			hi = mid-1;
+		}else if(item > items[mid]){
+			lo = mid+1;
+		}else{
+			return mid;
+		}
+	}
+	return -1;
 }
