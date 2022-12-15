@@ -1,7 +1,7 @@
 /*
  * Author : RaulSosa
  *
- * Dada una lista de lista de numeros (una matriz) . Calcular la suma de cada una de sus listas
+ * Abstraccion del problema :Dada una lista de lista de numeros (una matriz) . Calcular la suma de cada una de sus listas
  * internas y luego encontrar el top 3 de las listas cuyas sumas son las mas grandes.
  *
  */
