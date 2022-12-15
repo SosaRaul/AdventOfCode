@@ -1,5 +1,5 @@
-<!--- Si no entendés el inglés acá tenés una traducción( no es la más académica pero va) -->
-Day 3 - AdventOfCode
+
+### Day 3 - AdventOfCode
 
 Uno de los elfos tuvo la tarea de cargar todas las mochilas con provisiones para el viaje a la jungla. Desafortunadamente ese elfo no siguió las instrucciones de empaquetado y entonces algunos items ahora tienen que ser reorganizados.
 
