@@ -62,4 +62,14 @@ Con el objetivo de priorizar la reorganización de los items , a cada tipo de it
 - Items en minúscula de la "a" a "z" tienen prioridad del 1 al 26.
 - Items en mayúsucla de la "A" a la "Z" tienen prioridades desde 27 a 52.
 
-Para el ejemplo de las 6 mochilas que acabamos de ver.
+Para el ejemplo de las 6 mochilas que acabamos de ver, las prioridades que tienen cada uno de los elementos en común entre los bosillos de una mochila dada son:  
+p &rarr; 16  
+L &rarr; 38  
+P &rarr; 42  
+v &rarr;     22  
+t &rarr; 20  
+s &rarr; 19  
+
+y su suma es 157.
+
+**Encontrar el item que tienen en común los bosillos de cada mochila.¿Cuál es la suma de las prioridades de esos items?**
