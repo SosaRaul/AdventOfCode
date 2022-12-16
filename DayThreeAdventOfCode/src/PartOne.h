@@ -18,5 +18,5 @@ namespace PartOne{
 	char getCommonItem(string firstHalf,string secondHalf);
 	int getSumOfPriorities(string pathToFile);
 	int searchItem(string items,char item);
-
+	int getPriorityOfChar(char item);
 }

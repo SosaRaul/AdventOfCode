@@ -54,12 +54,7 @@ int PartOne::getSumOfPriorities(string pathToFile){
 	char commonItem;
 	vector<vector<string>> rucksacks = getPuzzleInput(pathToFile);
 	for(unsigned int i = 0;i < rucksacks.size();i++){
-		commonItem = getCommonItem(rucksacks[i][0],rucksacks[i][1]);
-		if(searchItem("abcdefghijklmnopqrstuvwxyz",commonItem) != -1){
-			sum += commonItem - 96;
-		}else if (searchItem("ABCDEFGHIJKLMNOPQRSTUVWXYZ",commonItem) != -1){
-			sum += commonItem - 38;
-		}
+		sum += getPriorityOfChar(getCommonItem(rucksacks[i][0],rucksacks[i][1]));
 	}
 	return sum;
 }
@@ -70,4 +65,15 @@ int PartOne::searchItem(string items,char item){
 		i++;
 	}
 	return i == items.length() ? -1 : i;
+}
+
+int PartOne::getPriorityOfChar(char item){
+	int priority;
+
+	if(PartOne::searchItem("abcdefghijklmnopqrstuvwxyz",item) != -1){
+		priority = item - 96;
+	}else if(PartOne::searchItem("ABCDEFGHIJKLMNOPQRSTUVWXYZ",item) != -1){
+		priority = item - 38;
+	}
+	return priority;
 }
