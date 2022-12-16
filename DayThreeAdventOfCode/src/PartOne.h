@@ -20,8 +20,3 @@ namespace PartOne{
 	int searchItem(string items,char item);
 
 }
-
-namespace PartTwo{
-
-
-}
