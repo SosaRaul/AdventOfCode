@@ -1,3 +1,8 @@
+/*
+ * Author : RaulSosa
+ * https://linkedin.com/in/raulrsosa
+ *
+ */
 #include "PartTwo.h"
 #include "PartOne.h"
 
@@ -13,8 +18,8 @@ char PartTwo::getCommonItem(string &itemsFirstRucksack,string &itemsSecondRucksa
 	while(i < itemsFirstRucksack.length()){
 		resultSearchInSecond = PartTwo::searchItem(itemsSecondRucksack,itemsFirstRucksack[i]);
 		resultSearchInThird = PartTwo::searchItem(itemsThirdRucksack,itemsFirstRucksack[i]);
-		if((itemsSecondRucksack[resultSearchInSecond] == itemsThirdRucksack[resultSearchInThird]) && resultSearchInSecond != -1 ){
-			return itemsFirstRucksack[resultSearchInSecond];
+		if((itemsSecondRucksack[resultSearchInSecond] == itemsThirdRucksack[resultSearchInThird]) && resultSearchInSecond != -1 && resultSearchInThird != -1){
+			return itemsSecondRucksack[resultSearchInSecond];
 		}
 		i++;
 	}
@@ -25,8 +30,6 @@ int PartTwo::getSumOfPriorities(string pathToFile){
 	int sum = 0;
 
 	for(unsigned int i = 0;i < groups.size();i++){
-		// get common item from group[i] and sum
-		cout << getCommonItem(groups[i][0],groups[i][1],groups[i][2]) << std::endl;
 		sum += PartOne::getPriorityOfChar(PartTwo::getCommonItem(groups[i][0],groups[i][1],groups[i][2]));
 	}
 	return sum;
@@ -46,27 +49,22 @@ int PartTwo::searchItem(string rucksack,char item){
 	}
 	return -1;
 }
-
 vector<vector<string>> PartTwo::getPuzzleInput(string pathToFile){
 
 	ifstream puzzleInput(pathToFile);
 	string lineFromFile;
 	vector<string> items;
 	vector<vector<string>> groups;
-	int processedLines = 0;
+	int processedLines = -1;
 
 	if(puzzleInput.is_open()){
 		while(puzzleInput.eof() == false){
-			getline(puzzleInput,lineFromFile);
-			processedLines++;
-			if(processedLines % 4 != 0){
-				// Fill array of items , items inside rucksack
-				items.push_back(lineFromFile);
-			}else{
-				groups.push_back(items);
-				items.clear();
+			for(unsigned int i = 0;i < 3;i++){
+				getline(puzzleInput,lineFromFile);
 				items.push_back(lineFromFile);
 			}
+			groups.push_back(items);
+			items.clear();
 		}
 	}else{
 		cout << "Can't open the file provided.";
