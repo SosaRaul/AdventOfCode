@@ -37,25 +37,29 @@ int PartTwo::searchItem(string rucksack,char item){
 	return -1;
 }
 
-vector<vector<string>> getPuzzleInput(string pathToFile){
+vector<vector<string>> PartTwo::getPuzzleInput(string pathToFile){
+
 	ifstream puzzleInput(pathToFile);
 	string lineFromFile;
 	vector<string> items;
 	vector<vector<string>> groups;
-	int processedLines = -1;
+	int processedLines = 0;
+
 	if(puzzleInput.is_open()){
 		while(puzzleInput.eof() == false){
 			getline(puzzleInput,lineFromFile);
 			processedLines++;
-			if(processedLines % 3 != 0){
+			if(processedLines % 4 != 0){
 				// Fill array of items , items inside rucksack
-
-
-
-
+				items.push_back(lineFromFile);
+			}else{
+				groups.push_back(items);
+				items.clear();
+				items.push_back(lineFromFile);
 			}
 		}
 	}else{
-
+		cout << "Can't open the file provided.";
 	}
+	return groups;
 }
