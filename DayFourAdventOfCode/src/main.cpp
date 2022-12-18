@@ -6,7 +6,7 @@
 #include "DayFour.h"
 int main(){
 
-	cout << PartOne::countPairsIncludedInOthers("src/input");
+	cout << "Pairs included in others: " << PartOne::countPairsIncludedInOthers("src/input4");
 
 
 	return 0;

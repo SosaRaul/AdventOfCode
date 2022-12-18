@@ -16,8 +16,8 @@ int PartOne::countPairsIncludedInOthers(string pathToFile){
 	if(puzzleInput.is_open()){
 		while(!puzzleInput.eof()){
 			getline(puzzleInput,lineFromFile);
-			vector<int> listOfExtremes = getExtremesFromIntervals(lineFromFile);
-			if(isIncludedInSet(listOfExtremes[0],listOfExtremes[1],listOfExtremes[2],listOfExtremes[3])){
+			vector<int> extremes = getExtremesFromIntervals(lineFromFile);
+			if(isIncludedInSet(extremes[0],extremes[1],extremes[2],extremes[3]) || isIncludedInSet(extremes[2],extremes[3],extremes[0],extremes[1])){
 				count++;
 			}
 		}
