@@ -26,7 +26,6 @@ int PartOne::countPairsIncludedInOthers(string pathToFile){
 	}
 	return count;
 }
-
 vector<int> PartOne::getExtremesFromIntervals(string line){
 	string acumulator = "";
 	vector<int> listOfExtremes;
@@ -41,4 +40,25 @@ vector<int> PartOne::getExtremesFromIntervals(string line){
 	}
 	listOfExtremes.push_back(atoi(acumulator.c_str()));
 	return listOfExtremes;
+}
+int PartTwo::countOverlaps(string pathToFile){
+	ifstream puzzleInput(pathToFile);
+	string lineFromFile;
+	int count = 0;
+
+	if(puzzleInput.is_open()){
+		while(!puzzleInput.eof()){
+			getline(puzzleInput,lineFromFile);
+			vector<int> extremes = PartOne::getExtremesFromIntervals(lineFromFile);
+			if(areOverlaped(extremes[0],extremes[1],extremes[2],extremes[3])|| PartTwo::areOverlaped(extremes[2],extremes[3],extremes[0],extremes[1])){
+				count++;
+			}
+		}
+	}else{
+		cout << "Can't open file provided!";
+	}
+	return count;
+}
+bool PartTwo::areOverlaped(unsigned int a,unsigned int b,unsigned int c,unsigned int d){
+	return (d>=a && d<=b) || (c>=a && c<=b);
 }
