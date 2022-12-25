@@ -6,14 +6,16 @@
 #include<cstring>
 #include<iostream>
 #include<vector>
+#include<fstream>
 using std::vector;
 using std::string;
-
+using std::ifstream;
+using std::cout;
 
 namespace PartOne{
-	string getLineWithoutSpaces(string line);
-	vector<int> movementsParser(string pathToFile);
-	vector<vector<int>> boxesParser(string pathToFile);
+	vector<vector<int>> getMovements(string line);
+	vector<vector<char>> getDistributionOfCrates(string line);
+	vector<char> topOfEveryStack(string pathToFile);
 }
 namespace PartTwo{
 
