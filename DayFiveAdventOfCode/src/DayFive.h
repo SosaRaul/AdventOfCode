@@ -13,8 +13,8 @@ using std::ifstream;
 using std::cout;
 
 namespace PartOne{
-	vector<vector<int>> getMovements(string line);
-	vector<vector<char>> getDistributionOfCrates(string line);
+	vector<vector<int>> getMovements(ifstream &puzzleInput);
+	vector<vector<char>> getDistributionOfCrates(ifstream &puzzleInput);
 	vector<char> topOfEveryStack(string pathToFile);
 }
 namespace PartTwo{

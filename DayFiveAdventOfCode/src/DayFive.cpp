@@ -16,10 +16,8 @@ vector<char> topOfEveryStack(string pathToFile){
 
 
 
-vector<vector<char>> PartOne::getDistributionOfCrates(string pathToFile){
+vector<vector<char>> PartOne::getDistributionOfCrates(ifstream &puzzleInput){
 	int j = 0;
-	ifstream puzzleInput(pathToFile);
-
 	vector<vector<char>> matrixOfCrates;
 	int lineCounter = 0;
 	string line;
@@ -42,23 +40,31 @@ vector<vector<char>> PartOne::getDistributionOfCrates(string pathToFile){
 	return matrixOfCrates;
 }
 
-// Retorna vector de int con los movimientos para hacer segun cada fila del archivo
-//vector<vector<int>> PartOne::getMovements(string line){
-//	vector<int> cratesAndStacks;
-//	string lineWithoutSpaces = getLineWithoutSpaces(line);
-//	int firstPosition = lineWithoutSpaces.find("from",3);
-//	int secondPosition = lineWithoutSpaces.find("to",5);
-//
-//	string quantityOfCrates = getNumberFromString(lineWithoutSpaces,4,firstPosition-1);
-//	string positionFirstStack = getNumberFromString(lineWithoutSpaces,firstPosition+4,secondPosition-1);
-//	string positionSecondStack = getNumberFromString(lineWithoutSpaces,secondPosition+2,lineWithoutSpaces.length()-1);
-//
-//	cratesAndStacks.push_back(atoi(quantityOfCrates.c_str()));
-//	cratesAndStacks.push_back(atoi(positionFirstStack.c_str()));
-//	cratesAndStacks.push_back(atoi(positionSecondStack.c_str()));
-//
-//	return cratesAndStacks;
-//}
+ //Retorna vector de int con los movimientos para hacer segun cada fila del archivo
+vector<vector<int>> PartOne::getMovements(ifstream &puzzleInput){
+	string line;
+	vector<vector<int>> matrixOfCratesAndStacks;
+	vector<int> currentRow;
+	if(puzzleInput.is_open()){
+		while(puzzleInput.eof() == false){
+			getline(puzzleInput,line);
+			string lineWithoutSpaces = getLineWithoutSpaces(line);
+			int firstPosition = lineWithoutSpaces.find("from",3);
+			int secondPosition = lineWithoutSpaces.find("to",5);
+			string quantityOfCrates = getNumberFromString(lineWithoutSpaces,4,firstPosition-1);
+			string positionFirstStack = getNumberFromString(lineWithoutSpaces,firstPosition+4,secondPosition-1);
+			string positionSecondStack = getNumberFromString(lineWithoutSpaces,secondPosition+2,lineWithoutSpaces.length()-1);
+			currentRow.push_back(atoi(quantityOfCrates.c_str()));
+			currentRow.push_back(atoi(positionFirstStack.c_str()));
+			currentRow.push_back(atoi(positionSecondStack.c_str()));
+			matrixOfCratesAndStacks.push_back(currentRow);
+			currentRow.clear();
+		}
+	}else{
+		cout << "Can't open file provided! ";
+	}
+	return matrixOfCratesAndStacks;
+}
 string getNumberFromString(string str,int begin,int end){
 	string number = "";
 	for(unsigned int i = begin;i <= end;i++){
